@@ -24,6 +24,20 @@ def crear_tabla():
         cursor.close()
         connectDB.close()
     
+#Borrar tabla
+def borrar_tabla():
+    try:
+        connectDB = _sqlite3.connect('provincias.db')
+        cursor = connectDB.cursor()
+        cursor.execute('DROP TABLE provincias')
+        connectDB.commit()
+        print('Tabla borrada exitosamente')
+    except _sqlite3.OperationalError as error:
+        print(f'Error al borrar la tabla: {error}')
+    finally:
+        cursor.close()
+        connectDB.close()
+
 # Cargar datos desde un archivo CSV
 def cargar_datos():
     connectDB = _sqlite3.connect('provincias.db')
