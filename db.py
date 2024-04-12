@@ -11,7 +11,9 @@ def crear_tabla():
             CREATE TABLE provincias (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
-                provincia TEXT NOT NULL
+                provincia TEXT NOT NULL,
+                cp TEXT NOT NULL,
+                id_prov_mstr TEXT NOT NULL
             )
         ''')
         connectDB.commit()
@@ -53,9 +55,9 @@ def cargar_datos():
             cp = fila[3]
             id_prov_mstr = fila[4]
             cursor.execute('''
-                INSERT INTO provincias (nombre, provincia)
-                VALUES (?, ?)
-            ''', (localidad, provincia))
+                INSERT INTO provincias (nombre, provincia, cp, id_prov_mstr)
+                VALUES (?, ?, ?, ?)
+            ''', (localidad, provincia,cp,id_prov_mstr))
     connectDB.commit()
     cursor.close()  # Cerrar el cursor después de usarlo
     connectDB.close()  # Cerrar la conexión después de usarla
